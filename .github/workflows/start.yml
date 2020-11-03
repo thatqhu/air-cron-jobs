@@ -22,7 +22,7 @@ jobs:
         heroku --version
 
     - name: Scaling1
-      run: $(HEROKU_API_KEY=${{ secrets.heroku_key1 }} heroku ps:scale web=1 --app ${{ secrets.app1 }}
+      run: HEROKU_API_KEY=${{ secrets.heroku_key1 }} heroku ps:scale web=1 --app ${{ secrets.app1 }}
       id: scaling1
 
     - name: Scaling2
