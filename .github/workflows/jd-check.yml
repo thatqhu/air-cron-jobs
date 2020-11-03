@@ -8,9 +8,22 @@ jobs:
   start:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: prepare
+        uses: actions/checkout@v2
+        
+      - name: prepare node
+        uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm install request
-      - run: wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | cat | sed -e "s@var Key = ''@var Key = '${{ secrets.jd_key1 }}'@g" | sed -e "s@var DualKey = ''@var DualKey = '${{ secrets.jd_key2 }}'@g" | node
+
+      - name: run job
+        run: |
+          npm install request
+          wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js \ 
+          | cat | sed -e "s@var Key = ''@var Key = '${{ secrets.jd_key1 }}'@g" \
+          | node \
+          | grep -q "qiminghu"
+          wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js \ 
+          | cat | sed -e "s@var Key = ''@var Key = '${{ secrets.jd_key2 }}'@g" \
+          | node \
+          | grep -q "thatqhu"
