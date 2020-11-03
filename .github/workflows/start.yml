@@ -1,4 +1,4 @@
-name: Node.js Package
+name: Start
 
 on: [workflow_dispatch]
 jobs:
