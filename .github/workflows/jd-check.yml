@@ -1,6 +1,9 @@
 name: jd_check_in
 
-on: [workflow_dispatch]
+on: 
+  workflow_dispatch:
+  schedule:
+    - cron: "8 16 * * *"
 jobs:
   start:
     runs-on: ubuntu-latest
