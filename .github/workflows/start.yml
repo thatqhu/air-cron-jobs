@@ -8,11 +8,11 @@ jobs:
   start:
     runs-on: ubuntu-latest
     steps:
+      - id: start
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - id: start
       - run: npm install -g heroku
       - run: heroku --version
       - run: HEROKU_API_KEY=${{ secrets.heroku_key1 }} heroku ps:scale web=1 --app ${{ secrets.app1 }}
