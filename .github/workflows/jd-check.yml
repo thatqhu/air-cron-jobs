@@ -1,4 +1,4 @@
-name: All
+name: 
 
 on: [workflow_dispatch]
 jobs:
