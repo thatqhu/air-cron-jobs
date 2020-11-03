@@ -34,6 +34,4 @@ jobs:
     - id: scaling3
 
     - name: Upload Results
-    - run: echo steps.build_package.outputs.scaling1
-
-    - run: echo ${{ steps.start.output }}
+    - run: echo ${{ steps.build_package.outputs.scaling1 }}
