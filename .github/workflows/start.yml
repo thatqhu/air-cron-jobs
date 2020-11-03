@@ -22,8 +22,7 @@ jobs:
         heroku --version
 
     - name: Scaling1
-      run: echo "::set-output name=output1::$(heroku --version)"
-      #run: echo "::set-output name=output1::$(HEROKU_API_KEY=${{ secrets.heroku_key1 }} heroku ps:scale web=1 --app ${{ secrets.app1 }})"
+      run: echo "::set-output name=output1::$(HEROKU_API_KEY=${{ secrets.heroku_key1 }} heroku ps:scale web=1 --app ${{ secrets.app1 }} > ./output | c)"
       id: scaling1
 
     - name: Scaling2
