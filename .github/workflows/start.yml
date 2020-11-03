@@ -23,15 +23,15 @@ jobs:
 
     - name: Scaling1
       run: echo "##[set-output name=output1;]$(HEROKU_API_KEY=${{ secrets.heroku_key1 }} heroku ps:scale web=1 --app ${{ secrets.app1 }})"
-    - id: scaling1
+      id: scaling1
 
     - name: Scaling2
       run: "##[set-output name=output2;]$(HEROKU_API_KEY=${{ secrets.heroku_key2 }} heroku ps:scale web=1 --app ${{ secrets.app2 }})"
-    - id: scaling2
+      id: scaling2
 
     - name: Scaling3
       run: "##[set-output name=output3;]$(HEROKU_API_KEY=${{ secrets.heroku_key3 }} heroku ps:scale web=1 --app ${{ secrets.app3 }})"
-    - id: scaling3
+      id: scaling3
 
     - name: Upload Results
       run: echo ${{ steps.build_package.outputs.scaling1 }}
