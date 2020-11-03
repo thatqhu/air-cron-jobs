@@ -32,20 +32,3 @@ jobs:
     - name: Scaling3
       run: HEROKU_API_KEY=${{ secrets.heroku_key3 }} heroku ps:scale web=1 --app ${{ secrets.app3 }}
       id: scaling3
-    
-    - name: output
-      run: echo "::set-output name=output1::green"
-      id: test
-      
-    - name: Send mail
-      uses: dawidd6/action-send-mail@v2
-      with:
-        server_address: smtp.gmail.com
-        server_port: 465
-        username: ${{secrets.MAIL_USERNAME}}
-        password: ${{secrets.MAIL_PASSWORD}}
-        subject: Github Actions job result
-        # Literal body:
-        body: Build job of ${{ steps.test.outputs.output1 }} completed successfully!
-        to: ${{ secrets.receiver }}
-        from: Nobody
