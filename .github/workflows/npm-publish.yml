@@ -3,13 +3,7 @@
 
 name: Node.js Package
 
-on:
-  workflow_dispatch:
-   inputs:
-     name:
-        description: 'Person to greet'
-        required: false
-    
+on: [workflow_dispatch]
 jobs:
   start:
     runs-on: ubuntu-latest
