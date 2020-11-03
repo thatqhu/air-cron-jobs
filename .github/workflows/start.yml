@@ -12,9 +12,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - id: start
       - run: npm install -g heroku
       - run: heroku --version
       - run: HEROKU_API_KEY=${{ secrets.heroku_key1 }} heroku ps:scale web=1 --app ${{ secrets.app1 }}
       - run: HEROKU_API_KEY=${{ secrets.heroku_key2 }} heroku ps:scale web=1 --app ${{ secrets.app2 }}
       - run: HEROKU_API_KEY=${{ secrets.heroku_key3 }} heroku ps:scale web=1 --app ${{ secrets.app3 }}
-      - run: echo ${{ github.context.payload }}
+      - run: echo ${{ steps.start.output }}
