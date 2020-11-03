@@ -21,7 +21,9 @@ jobs:
     - name: Scaling1
       run: |
        touch result.txt
-       HEROKU_API_KEY=${{ secrets.heroku_key1 }} heroku ps:scale web=1 --app ${{ secrets.app1 }} >> result.txt
-       HEROKU_API_KEY=${{ secrets.heroku_key2 }} heroku ps:scale web=1 --app ${{ secrets.app2 }} >> result.txt
-       HEROKU_API_KEY=${{ secrets.heroku_key3 }} heroku ps:scale web=1 --app ${{ secrets.app3 }} >> result.txt
-       cat result.txt | grep -q 'scale'
+       HEROKU_API_KEY=${{ secrets.heroku_key1 }} heroku ps:scale web=1 --app ${{ secrets.app1 }} > result.txt
+       cat result.txt | grep -q '1:Free'
+       HEROKU_API_KEY=${{ secrets.heroku_key2 }} heroku ps:scale web=1 --app ${{ secrets.app2 }} > result.txt
+       cat result.txt | grep -q '1:Free'
+       HEROKU_API_KEY=${{ secrets.heroku_key3 }} heroku ps:scale web=1 --app ${{ secrets.app3 }} > result.txt
+       cat result.txt | grep -q '1:Free'
