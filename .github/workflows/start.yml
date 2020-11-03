@@ -8,9 +8,6 @@ jobs:
   start:
     runs-on: ubuntu-latest
     steps:
-    - name: Setup Env
-      uses: actions/checkout@v2
-      
     - name: Setup Node
       uses: actions/setup-node@v1
       with:
@@ -22,13 +19,9 @@ jobs:
         heroku --version
 
     - name: Scaling1
-      run: HEROKU_API_KEY=${{ secrets.heroku_key1 }} heroku ps:scale web=1 --app ${{ secrets.app1 }}
-      id: scaling1
-
-    - name: Scaling2
-      run: HEROKU_API_KEY=${{ secrets.heroku_key2 }} heroku ps:scale web=1 --app ${{ secrets.app2 }}
-      id: scaling2
-
-    - name: Scaling3
-      run: HEROKU_API_KEY=${{ secrets.heroku_key3 }} heroku ps:scale web=1 --app ${{ secrets.app3 }}
-      id: scaling3
+      run: |
+       mkdir -p result.txt
+       HEROKU_API_KEY=${{ secrets.heroku_key1 }} heroku ps:scale web=1 --app ${{ secrets.app1 }} >> result.txt
+       HEROKU_API_KEY=${{ secrets.heroku_key2 }} heroku ps:scale web=1 --app ${{ secrets.app2 }} >> result.txt
+       HEROKU_API_KEY=${{ secrets.heroku_key3 }} heroku ps:scale web=1 --app ${{ secrets.app3 }} >> result.txt
+       cat result.txt | grep -q 'scale'
