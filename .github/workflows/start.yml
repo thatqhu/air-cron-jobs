@@ -26,4 +26,4 @@ jobs:
        HEROKU_API_KEY=${{ secrets.heroku_key2 }} heroku ps:scale web=1 --app ${{ secrets.app2 }} > result.txt
        grep "1:Free" result.txt
        HEROKU_API_KEY=${{ secrets.heroku_key3 }} heroku ps:scale web=1 --app ${{ secrets.app3 }} > result.txt
-       grep "2:Free" result.txt
+       grep "Free" result.txt
