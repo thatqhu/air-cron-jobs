@@ -1,0 +1,16 @@
+name: Node.js Package
+
+on: [workflow_dispatch]
+jobs:
+  start:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm install -g heroku
+      - run: heroku --version
+      - run: HEROKU_API_KEY=$heroku_key1 heroku ps:scale web=1 --app $app1
+      - run: HEROKU_API_KEY=$heroku_key2 heroku ps:scale web=1 --app $app2
+      - run: HEROKU_API_KEY=$heroku_key3 heroku ps:scale web=1 --app $app3
