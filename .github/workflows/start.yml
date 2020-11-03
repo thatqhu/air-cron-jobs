@@ -20,7 +20,7 @@ jobs:
 
     - name: Scaling1
       run: |
-       mkdir -p result.txt
+       touch result.txt
        HEROKU_API_KEY=${{ secrets.heroku_key1 }} heroku ps:scale web=1 --app ${{ secrets.app1 }} >> result.txt
        HEROKU_API_KEY=${{ secrets.heroku_key2 }} heroku ps:scale web=1 --app ${{ secrets.app2 }} >> result.txt
        HEROKU_API_KEY=${{ secrets.heroku_key3 }} heroku ps:scale web=1 --app ${{ secrets.app3 }} >> result.txt
