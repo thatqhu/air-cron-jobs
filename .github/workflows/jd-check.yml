@@ -17,11 +17,30 @@ jobs:
           node-version: 12
 
       - name: run job
-        #run: |
-          #npm install request
-          #wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | cat | sed -e "s@var Key = ''@var Key = '${{ secrets.jd_key1 }}'@g" | node | cat
-          #wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | cat | sed -e "s@var Key = ''@var Key = '${{ secrets.jd_key2 }}'@g" | node | cat
         run: |
           npm install request
-          wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | cat | node > jd.log
-          grep -q "jdjdjdjd" jd.log
+          wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js \ 
+          | node > jd.log
+          ls
+        #run: |
+         # npm install request
+         # wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js \ 
+         # | cat \ 
+         # | sed -e "s@var Key = ''@var Key = '${{ secrets.jd_key1 }}'@g" \ 
+         # | sed -e "s@var Key = ''@var Key = '${{ secrets.jd_key2 }}'@g" \ 
+         # | cat | node > jd.log
+         # ls
+        
+      - name: Send mail
+        if: not contains($(cat jd.log), "ddd") || not contains($(cat jd.log), "fff")
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: JD Checkin Failed
+          body: file://jd.log
+          to: ${{ secrets.RECEIVER }}
+          from: Nobody
+          content_type: text/html
