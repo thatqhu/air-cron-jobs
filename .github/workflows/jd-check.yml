@@ -29,8 +29,6 @@ jobs:
           echo "::set-output name=matched1::${val1}"
           echo "::set-output name=matched2::${val2}"
         id: jd
-      - name: test
-        run: echo "${{ steps.jd.outputs.matched1 }}"
       
       - name: Send mail
         if: steps.jd.outputs.matched1 == 0 || steps.jd.outputs.matched2 == 0
