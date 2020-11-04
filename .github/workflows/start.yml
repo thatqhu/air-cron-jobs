@@ -18,15 +18,8 @@ jobs:
         npm install -g heroku
         heroku --version
 
-    - name: Scaling1
+    - name: Pull up apps
       run: |
-       touch result.txt
-       echo "ggggg" > result.txt
-       HEROKU_API_KEY=${{ secrets.heroku_key1 }} heroku ps:scale web=1 --app ${{ secrets.app1 }} >> result.txt
-       cat result.txt
-       #grep "1:Free" result.txt
-       HEROKU_API_KEY=${{ secrets.heroku_key2 }} heroku ps:scale web=1 --app ${{ secrets.app2 }} > result.txt
-       
-       #grep "1:Free" result.txt
-       HEROKU_API_KEY=${{ secrets.heroku_key3 }} heroku ps:scale web=1 --app ${{ secrets.app3 }} > result.txt
-       #grep "Free" result.txt
+       HEROKU_API_KEY=${{ secrets.heroku_key1 }} heroku ps:scale web=1 --app ${{ secrets.app1 }}
+       HEROKU_API_KEY=${{ secrets.heroku_key2 }} heroku ps:scale web=1 --app ${{ secrets.app2 }}
+       HEROKU_API_KEY=${{ secrets.heroku_key3 }} heroku ps:scale web=1 --app ${{ secrets.app3 }}
