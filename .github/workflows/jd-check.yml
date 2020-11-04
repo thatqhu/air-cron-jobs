@@ -17,8 +17,26 @@ jobs:
           node-version: 12
 
       - name: run job
+        #run: |
+        #  npm install request
+        #  wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | cat | sed -e "s@var Key = ''@var Key = '${{ secrets.jd_key1 }}'@g" | sed -e "s@var DualKey = ''@var DualKey = '${{ secrets.jd_key2 }}'@g" | node > jd.log
+        #  grep -q "${{ secrets.matched1 }}" jd.log && grep -q "${{ secrets.matched1 }}" jd.log
         run: |
           npm install request
-          wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | cat | sed -e "s@var Key = ''@var Key = '${{ secrets.jd_key1 }}'@g" | sed -e "s@var DualKey = ''@var DualKey = '${{ secrets.jd_key2 }}'@g" | node > jd.log
-          grep -q "${{ secrets.matched1 }}" jd.log && grep -q "${{ secrets.matched1 }}" jd.log
-        
+          wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | cat | node > jd.log
+          echo '::set-output name=send_email::$(grep -q "${{ secrets.matched1 }}" jd.log && grep -q "${{ secrets.matched1 }}" jd.log)'
+        id: jd
+      
+      - name: Send mail
+        if: steps.jd.outputs.send_email == 1
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: JD Checkin Status
+          body: file://jd.log
+          to: ${{secrets.RECEIVER}}
+          from: Github Actions
+          content_type: text/html
