@@ -19,8 +19,7 @@ jobs:
       - name: run job
         run: |
           npm install request
-          wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js \ 
-          | node > jd.log
+          wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | node > jd.log
           ls
           echo '::set-output name=log::$(cat jd.log)'
         id: jd
