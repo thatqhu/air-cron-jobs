@@ -19,8 +19,10 @@ jobs:
           wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | cat | sed -e "s@var Key = ''@var Key = '${{ secrets.jd_key1 }}'@g" | sed -e "s@var DualKey = ''@var DualKey = '${{ secrets.jd_key2 }}'@g" | node > jd.log
           val1=$(grep "${{ secrets.MATCHED1 }}" jd.log | wc -l)
           val2=$(grep "${{ secrets.MATCHED2 }}" jd.log | wc -l)
+          result=$(grep "签到号一\|签到号二\|签到概览\|签到总计\|账号总计\|其他总计" jd.log | sed "s@^.*: @@")
           echo "::set-output name=matched1::${val1}"
           echo "::set-output name=matched2::${val2}"
+          echo "::set-output name=result::${result}"
         id: jd
         
       - name: Send Success Mail
@@ -31,9 +33,8 @@ jobs:
           server_port: 465
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
-          subject: JD Checkin Status
-          body: | 
-            grep '签到号一\|签到号二\|签到概览\|签到总计\|账号总计\|其他总计' jd.log | sed 's@^.*: @@'
+          subject: JD Checkin Success
+          body: steps.jd.outputs.result            
           to: ${{secrets.RECEIVER}}
           from: Github Actions
           content_type: text/html
@@ -46,7 +47,7 @@ jobs:
           server_port: 465
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
-          subject: JD Checkin Status
+          subject: JD Checkin Failed
           body: file://jd.log
           to: ${{secrets.RECEIVER}}
           from: Github Actions
