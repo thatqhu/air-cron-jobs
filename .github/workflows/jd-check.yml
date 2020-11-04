@@ -24,8 +24,8 @@ jobs:
         run: |
           npm install request
           wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | cat | node > jd.log
-          val1=$(grep "${{ secrets.matched1 }}" jd.log | wc -l)
-          val2=$(grep "${{ secrets.matched2 }}" jd.log | wc -l)
+          val1=$(grep "京东签到" jd.log | wc -l)
+          val2=$(grep "脚本终止" jd.log | wc -l)
           echo "::set-output name=matched1::${val1}"
           echo "::set-output name=matched2::${val2}"
         id: jd
