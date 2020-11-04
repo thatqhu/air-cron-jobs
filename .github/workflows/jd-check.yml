@@ -24,12 +24,12 @@ jobs:
         run: |
           npm install request
           wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | cat | node > jd.log
-          echo '::set-output name=send_email::$(grep -q "${{ secrets.matched1 }}" jd.log && grep -q "${{ secrets.matched1 }}" jd.log)'
-          echo "$(grep "京东签到" jd.log | wc -l)"
+          echo '::set-output name=matched1::$(grep -q "${{ secrets.matched1 }}" jd.log | wc -l)'
+          echo '::set-output name=matched2::$(grep -q "${{ secrets.matched2 }}" jd.log | wc -l)'
         id: jd
       
       - name: Send mail
-        if: steps.jd.outputs.send_email == 1
+        if: steps.jd.outputs.matched1 == 0 || steps.jd.outputs.matched2 == 0
         uses: dawidd6/action-send-mail@v2
         with:
           server_address: smtp.gmail.com
