@@ -22,5 +22,6 @@ jobs:
           #wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | cat | sed -e "s@var Key = ''@var Key = '${{ secrets.jd_key1 }}'@g" | node | cat
           #wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | cat | sed -e "s@var Key = ''@var Key = '${{ secrets.jd_key2 }}'@g" | node | cat
         run: |
+          npm install request
           wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | cat | node > jd.log
           cat jd.log
