@@ -21,7 +21,11 @@ jobs:
           npm install request
           wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | node > jd.log
           ls
-          echo '::set-output name=log::$(cat jd.log)'
+          if [grep -q '京东签到' jd.log] && [grep -q '脚本终止' jd.log]; then
+            echo '::set-output name=result::success'
+          else
+            echo '::set-output name=result::fail'
+          fi
         id: jd
         #run: |
          # npm install request
@@ -31,11 +35,9 @@ jobs:
          # | sed -e "s@var Key = ''@var Key = '${{ secrets.jd_key2 }}'@g" \ 
          # | cat | node > jd.log
          # ls
-      - name: test
-        run: cat steps.jd.outputs.log
         
       - name: Send mail
-        if: contains(steps.jd.outputs.log, '京东签到') != 'true' || contains(steps.jd.outputs.log, '脚本终止') != 'true'
+        if: steps.jd.outputs.result != 'success'
         uses: dawidd6/action-send-mail@v2
         with:
           server_address: smtp.gmail.com
