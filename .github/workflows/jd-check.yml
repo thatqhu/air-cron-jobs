@@ -25,7 +25,7 @@ jobs:
           npm install request
           wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | cat | node > jd.log
           echo '::set-output name=send_email::$(grep -q "${{ secrets.matched1 }}" jd.log && grep -q "${{ secrets.matched1 }}" jd.log)'
-          echo "$(cat jd.log)"
+          grep "${{ secrets.matched1 }}" jd.log
         id: jd
       
       - name: Send mail
