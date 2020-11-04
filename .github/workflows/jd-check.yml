@@ -22,6 +22,8 @@ jobs:
           wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js \ 
           | node > jd.log
           ls
+          echo '::set-output name=log::$(cat jd.log)'
+        id: jd
         #run: |
          # npm install request
          # wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js \ 
@@ -32,7 +34,7 @@ jobs:
          # ls
         
       - name: Send mail
-        if: contains($(cat jd.log), "ddd") != 'true' || contains($(cat jd.log), "fff") != 'true'
+        if: contains(steps.jd.outputs.log, "ddd") != 'true' || contains(steps.jd.outputs.log, "fff") != 'true'
         uses: dawidd6/action-send-mail@v2
         with:
           server_address: smtp.gmail.com
