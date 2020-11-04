@@ -32,7 +32,7 @@ jobs:
          # ls
         
       - name: Send mail
-        if: not contains($(cat jd.log), "ddd") || not contains($(cat jd.log), "fff")
+        if: contains($(cat jd.log), "ddd") != 'true' || contains($(cat jd.log), "fff") != 'true'
         uses: dawidd6/action-send-mail@v2
         with:
           server_address: smtp.gmail.com
