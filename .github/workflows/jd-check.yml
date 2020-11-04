@@ -28,8 +28,8 @@ jobs:
           val2=$(grep "${{ secrets.matched2 }}" jd.log | wc -l)
           echo '::set-output name=matched1::$(echo $(grep "${{ secrets.matched1 }}" jd.log | wc -l))'
           echo '::set-output name=matched2::$(echo $(grep "${{ secrets.matched2 }}" jd.log | wc -l))'
-          echo $(val1)
-          echo $(val2)
+          echo ${val1}
+          echo ${val2}
         id: jd
       
       - name: Send mail
