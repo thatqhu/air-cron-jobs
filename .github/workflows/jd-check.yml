@@ -31,6 +31,8 @@ jobs:
          # | sed -e "s@var Key = ''@var Key = '${{ secrets.jd_key2 }}'@g" \ 
          # | cat | node > jd.log
          # ls
+      - name: test
+        run: cat steps.jd.outputs.log
         
       - name: Send mail
         if: contains(steps.jd.outputs.log, '京东签到') != 'true' || contains(steps.jd.outputs.log, '脚本终止') != 'true'
