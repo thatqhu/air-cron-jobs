@@ -20,11 +20,10 @@ jobs:
         run: |
           npm install request
           wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | node > jd.log
-          ls
           if [ grep -q '京东签到' jd.log ] && [ grep -q '脚本终止' jd.log ] ; then
-            echo '::set-output name=result::success'
+            echo 'success'
           else
-            echo '::set-output name=result::fail'
+            echo 'fail'
           fi
         id: jd
         #run: |
@@ -36,16 +35,16 @@ jobs:
          # | cat | node > jd.log
          # ls
         
-      - name: Send mail
-        if: steps.jd.outputs.result != 'success'
-        uses: dawidd6/action-send-mail@v2
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          subject: JD Checkin Failed
-          body: file://jd.log
-          to: ${{ secrets.RECEIVER }}
-          from: Nobody
-          content_type: text/html
+      #- name: Send mail
+      #  if: steps.jd.outputs.result != 'success'
+      #  uses: dawidd6/action-send-mail@v2
+      #  with:
+      #    server_address: smtp.gmail.com
+      #    server_port: 465
+      #    username: ${{ secrets.MAIL_USERNAME }}
+      #    password: ${{ secrets.MAIL_PASSWORD }}
+      #    subject: JD Checkin Failed
+      #    body: file://jd.log
+      #    to: ${{ secrets.RECEIVER }}
+      #    from: Nobody
+      #    content_type: text/html
