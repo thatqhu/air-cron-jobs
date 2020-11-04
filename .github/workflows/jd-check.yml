@@ -24,4 +24,4 @@ jobs:
         run: |
           npm install request
           wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | cat | node > jd.log
-          cat jd.log
+          grep -q "京东签到" jd.log
