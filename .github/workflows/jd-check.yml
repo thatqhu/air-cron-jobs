@@ -20,7 +20,7 @@ jobs:
         run: |
           npm install request
           wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | node > jd.log
-          if [ grep -q "京东签到" jd.log ]
+          if [grep -q "京东签到" jd.log]
           then
             echo 'success'
           else
