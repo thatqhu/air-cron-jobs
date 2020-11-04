@@ -34,7 +34,7 @@ jobs:
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
           subject: JD Checkin Success
-          body: steps.jd.outputs.result            
+          body: ${{ steps.jd.outputs.result }}
           to: ${{secrets.RECEIVER}}
           from: Github Actions
           content_type: text/html
