@@ -21,7 +21,7 @@ jobs:
           npm install request
           wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | node > jd.log
           ls
-          if [grep -q '京东签到' jd.log] && [grep -q '脚本终止' jd.log]; then
+          if [ grep -q '京东签到' jd.log ] && [ grep -q '脚本终止' jd.log ] ; then
             echo '::set-output name=result::success'
           else
             echo '::set-output name=result::fail'
