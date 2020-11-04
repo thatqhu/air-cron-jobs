@@ -22,8 +22,23 @@ jobs:
           echo "::set-output name=matched1::${val1}"
           echo "::set-output name=matched2::${val2}"
         id: jd
+        
+      - name: Send Success Mail
+        if: steps.jd.outputs.matched1 == 1 && steps.jd.outputs.matched2 == 1
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: JD Checkin Status
+          body: | 
+            grep '签到号一\|签到号二\|签到概览\|签到总计\|账号总计\|其他总计' jd.log | sed 's@^.*: @@'
+          to: ${{secrets.RECEIVER}}
+          from: Github Actions
+          content_type: text/html
       
-      - name: Send mail
+      - name: Send Failed Mail
         if: steps.jd.outputs.matched1 == 0 || steps.jd.outputs.matched2 == 0
         uses: dawidd6/action-send-mail@v2
         with:
