@@ -19,8 +19,8 @@ jobs:
       - name: run job
         run: |
           npm install request
-          wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | node > jd.log
-          grep -q "qiminghu" jd.log && grep -q "thatqhu" jd.log
+          wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | cat | node > jd.log
+          grep -q "${{ secrets.matched1 }}" jd.log && grep -q "${{ secrets.matched1 }}" jd.log
         #run: |
          # npm install request
          # wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js \ 
