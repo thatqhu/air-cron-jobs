@@ -33,7 +33,7 @@ jobs:
          # ls
         
       - name: Send mail
-        if: contains(steps.jd.outputs.log, 'ddd') != 'true' || contains(steps.jd.outputs.log, 'fff') != 'true'
+        if: contains(steps.jd.outputs.log, '京东签到') != 'true' || contains(steps.jd.outputs.log, '脚本终止') != 'true'
         uses: dawidd6/action-send-mail@v2
         with:
           server_address: smtp.gmail.com
