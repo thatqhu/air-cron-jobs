@@ -19,7 +19,7 @@ jobs:
           wget -q -O - https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js | cat | sed -e "s@var Key = ''@var Key = '${{ secrets.jd_key1 }}'@g" | sed -e "s@var DualKey = ''@var DualKey = '${{ secrets.jd_key2 }}'@g" | node > jd.log
           val1=$(grep "${{ secrets.MATCHED1 }}" jd.log | wc -l)
           val2=$(grep "${{ secrets.MATCHED2 }}" jd.log | wc -l)
-          grep "签到号一\|签到号二\|签到概览\|签到总计\|账号总计\|其他总计" jd.log | sed "s@^.*: @@G" > result.log
+          grep "签到号一\|签到号二\|签到概览\|签到总计\|账号总计\|其他总计" jd.log | awk '{print $0,"\n---------------"}' > result.log
           echo "::set-output name=matched1::${val1}"
           echo "::set-output name=matched2::${val2}"
         id: jd
