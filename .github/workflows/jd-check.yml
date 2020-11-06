@@ -36,7 +36,7 @@ jobs:
           body: file://result.log
           to: ${{secrets.RECEIVER}}
           from: Github Actions
-          content_type: text/html
+          content_type: text/plain
       
       - name: Send Failed Mail
         if: steps.jd.outputs.matched1 == 0 || steps.jd.outputs.matched2 == 0
@@ -50,4 +50,4 @@ jobs:
           body: file://jd.log
           to: ${{secrets.RECEIVER}}
           from: Github Actions
-          content_type: text/html
+          content_type: text/plain
