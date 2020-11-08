@@ -3,7 +3,7 @@ name: jd_check_in
 on: 
   workflow_dispatch:
   schedule:
-    - cron: "8 16 * * *"
+    - cron: "0 16 * * *"
 jobs:
   start:
     runs-on: ubuntu-latest
