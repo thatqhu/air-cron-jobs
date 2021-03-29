@@ -16,7 +16,7 @@ jobs:
       - name: run job
         run: |
           npm install request
-          wget -q -O - ${{ secrets.SCRIPT }} | cat | sed -e "s@var Key = ''@var Key = '${{ secrets.jd_key1 }}'@g" | sed -e "s@var DualKey = ''@var DualKey = '${{ secrets.jd_key2 }}'@g" | node > jd.log
+          wget -q -O - ${{ secrets.SCRIPT }} | cat | sed -e "s@var Key = ''@var Key = '${{ secrets.jd_key1 }}'@g" | sed -e "s@var DualKey = ''@var DualKey = '${{ secrets.jd_key2 }}'@g" | sed -e "s@var OtherKey = ''@var OtherKey = '${{ secrets.jd_other_key }}'@g" | node > jd.log
           val1=$(grep "${{ secrets.MATCHED1 }}" jd.log | wc -l)
           val2=$(grep "${{ secrets.MATCHED2 }}" jd.log | wc -l)
           grep "${{ secrets.FIELDS }}" jd.log | awk '{print $0,"\n"}' > result.log
