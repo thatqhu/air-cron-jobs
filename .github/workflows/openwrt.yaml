@@ -60,7 +60,7 @@ jobs:
           CONFIG_PACKAGE_ipv6helper=y
 
           # USB support
-          ONFIG_PACKAGE_kmod-usb-core=y
+          CONFIG_PACKAGE_kmod-usb-core=y
           CONFIG_PACKAGE_kmod-usb3=y
           CONFIG_PACKAGE_kmod-usb-storage=y
           CONFIG_PACKAGE_kmod-usb-storage-extras=y
@@ -90,7 +90,7 @@ jobs:
           CONFIG_PACKAGE_luci-theme-bootstrap=y
           CONFIG_PACKAGE_luci-theme-material=y
           CONFIG_PACKAGE_luci-theme-openwrt=y
-          CONFIG_PACKAGE_luci-theme-rosy=y
+          CONFIG_PACKAGE_luci-theme-rosy=
           CONFIG_PACKAGE_luci-app-udpxy=y
           
           CONFIG_LUCI_LANG_zh_Hans=y
