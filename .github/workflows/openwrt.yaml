@@ -75,7 +75,6 @@ jobs:
           CONFIG_PACKAGE_luci-app-mwan3=y
           CONFIG_PACKAGE_luci-app-ttyd=y
           CONFIG_PACKAGE_luci-app-usb-printer=y
-          CONFIG_PACKAGE_luci-app-xlnetacc=y
           CONFIG_PACKAGE_luci-app-flowoffload=y
           CONFIG_PACKAGE_luci-app-adbyby-plus=y
           CONFIG_PACKAGE_luci-app-accesscontrol=y
@@ -86,11 +85,8 @@ jobs:
           CONFIG_PACKAGE_dnsmasq_full_dhcp=y
           CONFIG_PACKAGE_dnsmasq_full_ipset=y
           CONFIG_PACKAGE_luci-theme-argon=y
-          CONFIG_PACKAGE_luci-theme-opentomato=y
-          CONFIG_PACKAGE_luci-theme-bootstrap=y
           CONFIG_PACKAGE_luci-theme-material=y
           CONFIG_PACKAGE_luci-theme-openwrt=y
-          CONFIG_PACKAGE_luci-theme-rosy=
           CONFIG_PACKAGE_luci-app-udpxy=y
           
           CONFIG_LUCI_LANG_zh_Hans=y
